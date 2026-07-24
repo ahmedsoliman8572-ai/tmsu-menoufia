@@ -1,0 +1,199 @@
+/* ============================================================
+   TMSU Menoufia — Design Tokens
+   Latest CSS: @property, oklch(), color-mix(), CSS Nesting
+   ============================================================ */
+
+/* --- Typed Custom Properties via @property --- */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --hero-opacity {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: false;
+}
+
+@property --counter-value {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: true;
+}
+
+/* --- Color Palette (oklch for perceptual uniformity) --- */
+:root {
+  /* === Primary Colors === */
+  --clr-primary: oklch(0.52 0.2 25);           /* Deep Red #C41E3A */
+  --clr-primary-light: oklch(0.62 0.18 25);
+  --clr-primary-dark: oklch(0.42 0.22 25);
+
+  /* === Secondary Colors (Menoufia Purple) === */
+  --clr-secondary: oklch(0.45 0.2 310);        /* Purple #7B2D8E */
+  --clr-secondary-light: oklch(0.55 0.18 310);
+  --clr-secondary-dark: oklch(0.35 0.22 310);
+
+  /* === Accent Colors (Gold) === */
+  --clr-accent: oklch(0.75 0.14 85);           /* Gold #D4A853 */
+  --clr-accent-light: oklch(0.82 0.12 85);
+  --clr-accent-dark: oklch(0.65 0.16 85);
+
+  /* === Neutral Colors === */
+  --clr-dark: oklch(0.2 0.03 270);             /* Near-black #1A1A2E */
+  --clr-dark-2: oklch(0.25 0.025 270);
+  --clr-dark-3: oklch(0.3 0.02 270);
+  --clr-gray: oklch(0.6 0.01 270);
+  --clr-gray-light: oklch(0.85 0.005 270);
+  --clr-light: oklch(0.97 0.003 270);          /* Off-white #F5F5F7 */
+  --clr-white: oklch(1 0 0);                   /* Pure white */
+
+  /* === Semantic Colors === */
+  --clr-success: oklch(0.65 0.18 145);
+  --clr-warning: oklch(0.78 0.15 75);
+  --clr-error: oklch(0.58 0.22 25);
+  --clr-info: oklch(0.6 0.15 245);
+
+  /* === Surface Colors (Light Theme) === */
+  --surface-bg: var(--clr-light);
+  --surface-card: var(--clr-white);
+  --surface-nav: oklch(1 0 0 / 0.85);
+  --surface-footer: var(--clr-dark);
+  --surface-overlay: oklch(0 0 0 / 0.5);
+
+  /* === Text Colors === */
+  --text-primary: var(--clr-dark);
+  --text-secondary: var(--clr-gray);
+  --text-inverse: var(--clr-white);
+  --text-accent: var(--clr-accent-dark);
+  --text-link: var(--clr-primary);
+
+  /* === Gradients === */
+  --gradient-primary: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+  --gradient-accent: linear-gradient(135deg, var(--clr-accent-dark), var(--clr-accent-light));
+  --gradient-dark: linear-gradient(135deg, var(--clr-dark), var(--clr-dark-2));
+  --gradient-hero: linear-gradient(
+    var(--gradient-angle),
+    oklch(0.2 0.03 270) 0%,
+    oklch(0.25 0.08 310) 30%,
+    oklch(0.22 0.1 25) 60%,
+    oklch(0.2 0.03 270) 100%
+  );
+  --gradient-glass: linear-gradient(
+    135deg,
+    oklch(1 0 0 / 0.1),
+    oklch(1 0 0 / 0.05)
+  );
+
+  /* === Typography === */
+  --ff-heading: 'Cairo', 'Segoe UI', sans-serif;
+  --ff-body: 'Tajawal', 'Segoe UI', sans-serif;
+  --ff-english: 'Inter', 'Segoe UI', sans-serif;
+  --ff-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --fs-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
+  --fs-sm: clamp(0.8rem, 0.75rem + 0.3vw, 0.9rem);
+  --fs-base: clamp(0.95rem, 0.9rem + 0.3vw, 1.05rem);
+  --fs-md: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.75vw, 1.6rem);
+  --fs-xl: clamp(1.5rem, 1.2rem + 1.5vw, 2.2rem);
+  --fs-2xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  --fs-3xl: clamp(2.5rem, 1.8rem + 3.5vw, 4rem);
+  --fs-hero: clamp(2.8rem, 2rem + 4vw, 5rem);
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  --lh-tight: 1.2;
+  --lh-snug: 1.375;
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.8;
+
+  /* === Spacing Scale === */
+  --sp-2xs: 0.25rem;
+  --sp-xs: 0.5rem;
+  --sp-sm: 0.75rem;
+  --sp-md: 1rem;
+  --sp-lg: 1.5rem;
+  --sp-xl: 2rem;
+  --sp-2xl: 3rem;
+  --sp-3xl: 4rem;
+  --sp-4xl: 6rem;
+  --sp-5xl: 8rem;
+
+  /* === Border Radius === */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+
+  /* === Shadows === */
+  --shadow-xs: 0 1px 2px oklch(0 0 0 / 0.05);
+  --shadow-sm: 0 2px 8px oklch(0 0 0 / 0.08);
+  --shadow-md: 0 4px 16px oklch(0 0 0 / 0.1);
+  --shadow-lg: 0 8px 32px oklch(0 0 0 / 0.12);
+  --shadow-xl: 0 16px 48px oklch(0 0 0 / 0.15);
+  --shadow-glow-primary: 0 0 30px oklch(0.52 0.2 25 / 0.3);
+  --shadow-glow-accent: 0 0 30px oklch(0.75 0.14 85 / 0.3);
+  --shadow-glow-secondary: 0 0 30px oklch(0.45 0.2 310 / 0.3);
+
+  /* === Glass Effect === */
+  --glass-bg: oklch(1 0 0 / 0.08);
+  --glass-border: oklch(1 0 0 / 0.15);
+  --glass-blur: 20px;
+
+  /* === Transitions === */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 800ms;
+
+  --gradient-heading: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+  --clr-subtitle: var(--clr-primary);
+
+  /* === Z-Index Scale === */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+
+  /* === Container Widths === */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-2xl: 1400px;
+}
+
+/* === Dark Theme Override === */
+[data-theme="dark"] {
+  --surface-bg: var(--clr-dark);
+  --surface-card: var(--clr-dark-2);
+  --surface-nav: oklch(0.2 0.03 270 / 0.95);
+  --text-primary: #FFFFFF;
+  --text-secondary: oklch(0.85 0 0);
+  --text-link: var(--clr-accent);
+  --clr-subtitle: var(--clr-accent);
+  --gradient-heading: linear-gradient(135deg, #FFFFFF 40%, var(--clr-accent-light));
+
+  --glass-bg: oklch(0 0 0 / 0.25);
+  --glass-border: oklch(1 0 0 / 0.12);
+
+  --shadow-xs: 0 1px 2px oklch(0 0 0 / 0.2);
+  --shadow-sm: 0 2px 8px oklch(0 0 0 / 0.25);
+  --shadow-md: 0 4px 16px oklch(0 0 0 / 0.3);
+  --shadow-lg: 0 8px 32px oklch(0 0 0 / 0.35);
+  --shadow-xl: 0 16px 48px oklch(0 0 0 / 0.4);
+}

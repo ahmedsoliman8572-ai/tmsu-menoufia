@@ -1,0 +1,225 @@
+/* ============================================================
+   TMSU Menoufia — Base Styles
+   Reset, Typography, RTL, Scrollbar, Global Elements
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* --- Modern CSS Reset --- */
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+    hanging-punctuation: first last;
+  }
+
+  body {
+    min-height: 100dvh;
+    line-height: var(--lh-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+
+  p {
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  dialog {
+    padding: 0;
+    border: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--clr-accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: color-mix(in oklch, var(--clr-primary) 30%, transparent);
+    color: var(--text-primary);
+  }
+}
+
+/* --- Global Body Styles --- */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-base);
+  color: var(--text-primary);
+  background-color: var(--surface-bg);
+  direction: rtl;
+  transition:
+    background-color var(--duration-slow) var(--ease-out),
+    color var(--duration-slow) var(--ease-out);
+}
+
+/* English mode override */
+[data-lang="en"] {
+  direction: ltr;
+}
+
+[data-lang="en"] body {
+  direction: ltr;
+  font-family: var(--ff-english);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ff-heading);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--text-primary);
+}
+
+[data-lang="en"] h1,
+[data-lang="en"] h2,
+[data-lang="en"] h3,
+[data-lang="en"] h4,
+[data-lang="en"] h5,
+[data-lang="en"] h6 {
+  font-family: var(--ff-english);
+}
+
+h1 { font-size: var(--fs-3xl); }
+h2 { font-size: var(--fs-2xl); }
+h3 { font-size: var(--fs-xl); }
+h4 { font-size: var(--fs-lg); }
+h5 { font-size: var(--fs-md); }
+h6 { font-size: var(--fs-base); }
+
+p {
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+strong { font-weight: var(--fw-bold); }
+
+small { font-size: var(--fs-sm); }
+
+/* --- Links --- */
+a:not([class]) {
+  color: var(--text-link);
+  text-decoration-skip-ink: auto;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+a:not([class]):hover {
+  color: var(--clr-primary-light);
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--clr-gray) 50%, transparent);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--surface-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-gray);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, var(--clr-gray) 50%, transparent) transparent;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Screen Reader Only --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* --- Content Visibility for Performance --- */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
