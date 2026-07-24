@@ -13,14 +13,16 @@
     right: 0;
     z-index: var(--z-sticky);
     padding: var(--sp-md) 0;
-    background: var(--surface-nav);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border-bottom: 1px solid var(--glass-border);
+    background: transparent;
+    border-bottom: 1px solid transparent;
     transition: all var(--duration-normal) var(--ease-out);
 
     &.scrolled {
       padding: var(--sp-xs) 0;
+      background: var(--surface-nav);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      border-bottom: 1px solid var(--glass-border);
       box-shadow: var(--shadow-md);
     }
 
