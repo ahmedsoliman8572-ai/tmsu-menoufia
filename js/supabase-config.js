@@ -443,6 +443,25 @@ window.TMSU_API = {
     localStorage.removeItem('tmsu_board_members');
   },
 
+  // Storage Bucket File Upload
+  async uploadImage(file, bucket = 'public-images') {
+    if (!supabaseClient) return null;
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const { data, error } = await supabaseClient.storage.from(bucket).upload(fileName, file, { cacheControl: '3600', upsert: true });
+      if (error) {
+        console.warn('Supabase storage upload error:', error);
+        return null;
+      }
+      const { data: publicUrlData } = supabaseClient.storage.from(bucket).getPublicUrl(fileName);
+      return publicUrlData?.publicUrl || null;
+    } catch (e) {
+      console.warn('Storage upload exception:', e);
+      return null;
+    }
+  },
+
   // Realtime Live Subscriptions
   subscribeToRealtimeChanges(callback) {
     if (supabaseClient && typeof supabaseClient.channel === 'function') {

@@ -599,7 +599,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const boardPreviewContainer = document.getElementById('board-preview-container');
   const boardPreviewImg = document.getElementById('board-preview-img');
 
-  boardFileInput?.addEventListener('change', (e) => {
+  boardFileInput?.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -609,6 +609,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         boardPreviewContainer.style.display = 'block';
       };
       reader.readAsDataURL(file);
+
+      if (window.TMSU_API?.uploadImage) {
+        const publicUrl = await window.TMSU_API.uploadImage(file);
+        if (publicUrl) boardImageInput.value = publicUrl;
+      }
     }
   });
 
@@ -693,7 +698,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const newsPreviewContainer = document.getElementById('news-preview-container');
   const newsPreviewImg = document.getElementById('news-preview-img');
 
-  newsFileInput?.addEventListener('change', (e) => {
+  newsFileInput?.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -703,6 +708,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         newsPreviewContainer.style.display = 'block';
       };
       reader.readAsDataURL(file);
+
+      if (window.TMSU_API?.uploadImage) {
+        const publicUrl = await window.TMSU_API.uploadImage(file);
+        if (publicUrl) newsImageInput.value = publicUrl;
+      }
     }
   });
 
@@ -711,7 +721,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const eventPreviewContainer = document.getElementById('event-preview-container');
   const eventPreviewImg = document.getElementById('event-preview-img');
 
-  eventFileInput?.addEventListener('change', (e) => {
+  eventFileInput?.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -721,6 +731,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         eventPreviewContainer.style.display = 'block';
       };
       reader.readAsDataURL(file);
+
+      if (window.TMSU_API?.uploadImage) {
+        const publicUrl = await window.TMSU_API.uploadImage(file);
+        if (publicUrl) eventImageInput.value = publicUrl;
+      }
     }
   });
 
@@ -986,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   openTopModalBtn?.addEventListener('click', () => openTopModal(null));
 
-  topFileInput?.addEventListener('change', (e) => {
+  topFileInput?.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -996,6 +1011,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (topPreviewContainer) topPreviewContainer.style.display = 'block';
       };
       reader.readAsDataURL(file);
+
+      if (window.TMSU_API?.uploadImage) {
+        const publicUrl = await window.TMSU_API.uploadImage(file);
+        if (publicUrl && topImageInput) topImageInput.value = publicUrl;
+      }
     }
   });
 
