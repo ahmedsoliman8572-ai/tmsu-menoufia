@@ -61,45 +61,14 @@ window.TMSU_API = {
   
   // Auth Operations
   async login(email, password) {
-    // 1. Try Supabase Auth if client is available
     if (supabaseClient) {
-      // Attempt sign-in with existing user
       const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      if (!error && data?.session) return data;
-
-      // Sign-in failed — check if user exists by attempting sign-up
-      if (error) {
-        try {
-          const { data: signUpData, error: signUpError } = await supabaseClient.auth.signUp({ email, password });
-          
-          if (signUpError) {
-            // "User already registered" = user exists but password is WRONG
-            if (signUpError.message && (signUpError.message.includes('already registered') || signUpError.message.includes('already exists') || signUpError.status === 422)) {
-              throw new Error('كلمة المرور غير صحيحة. تأكد من كلمة المرور وحاول مرة أخرى.');
-            }
-            throw new Error(signUpError.message || 'فشل تسجيل الدخول');
-          }
-          
-          // Sign-up succeeded — new user created
-          if (signUpData?.user) {
-            if (signUpData.session) return signUpData;
-            // No session = email confirmation required
-            throw new Error('تم إنشاء الحساب بنجاح! يرجى تأكيد البريد الإلكتروني أولاً ثم إعادة تسجيل الدخول.');
-          }
-        } catch (signUpErr) {
-          throw signUpErr;
-        }
+      if (error || !data?.session) {
+        throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة. يرجى التأكد من إضافة المستخدم في Supabase.');
       }
+      return data;
     }
-
-    // 2. Fallback: local session login (only when Supabase is unavailable)
-    if (email === 'admin@tmsu.eg' && password === 'admin123') {
-      const session = { user: { email, role: 'admin' }, token: 'demo_token' };
-      localStorage.setItem('tmsu_admin_session', JSON.stringify(session));
-      return session;
-    } else {
-      throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
-    }
+    throw new Error('تعذر الاتصال بقاعدة البيانات. التأكد من ربط حساب الأدمن في Supabase.');
   },
 
   async getCurrentUser() {
@@ -109,8 +78,7 @@ window.TMSU_API = {
         if (user) return user;
       } catch (e) {}
     }
-    const session = localStorage.getItem('tmsu_admin_session');
-    return session ? JSON.parse(session).user : null;
+    return null;
   },
 
   async logout() {
