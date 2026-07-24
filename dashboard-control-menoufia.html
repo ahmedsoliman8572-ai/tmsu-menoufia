@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم الإدارية | اتحاد طلاب تحيا مصر - المنوفية</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    body {
+      background-color: var(--surface-bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      font-family: var(--ff-heading);
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    /* Clean Navbar Fix */
+    .admin-navbar {
+      background: color-mix(in oklch, var(--surface-bg) 85%, transparent);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid color-mix(in oklch, var(--text-primary) 12%, transparent);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 24px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+    }
+    .admin-navbar-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .admin-navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .admin-navbar-brand img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--clr-accent);
+      object-fit: cover;
+      box-shadow: 0 0 14px color-mix(in oklch, var(--clr-accent) 45%, transparent);
+    }
+    .admin-navbar-brand .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .admin-navbar-brand .brand-title {
+      font-size: var(--fs-base);
+      font-weight: var(--fw-bold);
+      background: linear-gradient(135deg, var(--text-primary), var(--clr-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .admin-navbar-brand .brand-sub {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      font-weight: var(--fw-medium);
+    }
+    .admin-navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Glass Buttons in Navbar */
+    .admin-nav-btn {
+      height: 38px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border-radius: 10px;
+      background: color-mix(in oklch, var(--text-primary) 6%, transparent);
+      border: 1px solid color-mix(in oklch, var(--text-primary) 14%, transparent);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-bold);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+    .admin-nav-btn:hover {
+      background: color-mix(in oklch, var(--clr-accent) 15%, transparent);
+      border-color: var(--clr-accent);
+      color: var(--clr-accent);
+      transform: translateY(-1px);
+    }
+
+    .admin-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: var(--sp-xl) var(--sp-md);
+      box-sizing: border-box;
+    }
+    
+    .glass-card {
+      background: var(--surface-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid color-mix(in oklch, var(--text-primary) 12%, transparent);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-xl);
+      box-shadow: var(--shadow-lg);
+      color: var(--text-primary);
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Auth Card */
+    .login-wrapper {
+      min-height: calc(100vh - 160px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--sp-md);
+    }
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      background: var(--surface-card);
+      border: 1px solid color-mix(in oklch, var(--text-primary) 15%, transparent);
+      box-shadow: var(--shadow-xl);
+    }
+    .login-card .logo-img {
+      width: 90px;
+      height: 90px;
+      border-radius: var(--radius-full);
+      border: 3px solid var(--clr-accent);
+      margin-bottom: var(--sp-md);
+      box-shadow: var(--shadow-glow-accent);
+      object-fit: cover;
+    }
+    .login-card h2 {
+      color: var(--text-primary);
+      font-size: var(--fs-xl);
+      margin-bottom: var(--sp-2xs);
+    }
+    .login-card p {
+      color: var(--text-secondary);
+    }
+
+    /* Form Styles */
+    .form-label {
+      color: var(--text-primary);
+      font-weight: var(--fw-semibold);
+      font-size: var(--fs-sm);
+      display: block;
+      margin-bottom: var(--sp-2xs);
+    }
+    .form-input {
+      width: 100%;
+      background: color-mix(in oklch, var(--surface-bg) 90%, #000);
+      border: 1px solid color-mix(in oklch, var(--text-primary) 20%, transparent);
+      color: var(--text-primary);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: var(--fs-base);
+      box-sizing: border-box;
+      transition: border-color var(--duration-fast) var(--ease-out);
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--clr-accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--clr-accent) 25%, transparent);
+    }
+    .form-input::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.6;
+    }
+
+    /* Demo Notice Box */
+    .demo-notice {
+      margin-top: var(--sp-lg);
+      padding: var(--sp-md);
+      background: color-mix(in oklch, var(--clr-accent) 12%, transparent);
+      border: 1px solid color-mix(in oklch, var(--clr-accent) 30%, transparent);
+      border-radius: var(--radius-lg);
+      font-size: var(--fs-xs);
+      color: var(--text-primary);
+      line-height: var(--lh-relaxed);
+      text-align: right;
+    }
+    .demo-notice code {
+      background: color-mix(in oklch, var(--clr-accent) 25%, transparent);
+      color: var(--clr-accent-light);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: var(--ff-mono);
+      direction: ltr;
+      display: inline-block;
+    }
+
+    /* Stat Cards Grid */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--sp-md);
+      margin-bottom: var(--sp-xl);
+    }
+    .stat-badge-card {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      background: var(--surface-card);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-lg);
+      border: 1px solid color-mix(in oklch, var(--text-primary) 10%, transparent);
+      color: var(--text-primary);
+    }
+    .stat-badge-icon {
+      font-size: 2.2rem;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: color-mix(in oklch, var(--clr-primary) 15%, transparent);
+      border-radius: var(--radius-md);
+    }
+
+    /* Status Pill in Navbar */
+    .db-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-bold);
+      backdrop-filter: blur(10px);
+      transition: all var(--duration-normal);
+      white-space: nowrap;
+    }
+    .db-status-pill.online {
+      background: rgba(46, 204, 113, 0.12);
+      border: 1px solid rgba(46, 204, 113, 0.35);
+      color: #2ecc71;
+    }
+    .db-status-pill.offline {
+      background: rgba(241, 196, 15, 0.12);
+      border: 1px solid rgba(241, 196, 15, 0.35);
+      color: var(--clr-accent);
+    }
+    .status-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: currentColor;
+      box-shadow: 0 0 8px currentColor;
+      animation: pulse-glow 2s infinite;
+    }
+    @keyframes pulse-glow {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0.4; transform: scale(0.9); }
+    }
+
+    /* Admin Navigation Tabs */
+    .admin-tabs {
+      display: flex;
+      gap: var(--sp-xs);
+      border-bottom: 2px solid color-mix(in oklch, var(--text-primary) 10%, transparent);
+      margin-bottom: var(--sp-lg);
+      overflow-x: auto;
+    }
+    .admin-tab-btn {
+      padding: var(--sp-sm) var(--sp-lg);
+      font-weight: var(--fw-bold);
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all var(--duration-fast) var(--ease-out);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-xs);
+      white-space: nowrap;
+      font-family: inherit;
+    }
+    .admin-tab-btn.active {
+      color: var(--clr-accent);
+      border-bottom-color: var(--clr-accent);
+    }
+
+    /* Action bar */
+    .action-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--sp-lg);
+      flex-wrap: wrap;
+      gap: var(--sp-md);
+    }
+    .action-header h3 {
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    /* Tables */
+    .data-table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: var(--radius-xl);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .custom-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      text-align: right;
+      color: var(--text-primary);
+    }
+    .custom-table th, .custom-table td {
+      padding: 14px 18px;
+      vertical-align: middle;
+      border-bottom: 1px solid color-mix(in oklch, var(--text-primary) 8%, transparent);
+    }
+    .custom-table th {
+      background: color-mix(in oklch, var(--text-primary) 6%, transparent);
+      color: var(--clr-accent-light);
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-xs);
+      white-space: nowrap;
+    }
+    .custom-table tbody tr {
+      transition: background-color 0.2s ease;
+    }
+    .custom-table tbody tr:hover {
+      background: color-mix(in oklch, var(--clr-accent) 6%, transparent);
+    }
+    .table-thumb {
+      width: 56px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid color-mix(in oklch, var(--clr-accent) 30%, transparent);
+    }
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.76rem;
+      font-weight: var(--fw-bold);
+      white-space: nowrap;
+    }
+    .badge-primary {
+      background: color-mix(in oklch, var(--clr-primary) 20%, transparent);
+      border: 1px solid color-mix(in oklch, var(--clr-primary) 40%, transparent);
+      color: var(--clr-accent);
+    }
+    .badge-committee {
+      background: color-mix(in oklch, var(--clr-accent) 18%, transparent);
+      border: 1px solid color-mix(in oklch, var(--clr-accent) 40%, transparent);
+      color: var(--clr-accent-light);
+    }
+    .badge-success {
+      background: rgba(46, 204, 113, 0.2);
+      color: #2ecc71;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--sp-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-box {
+      width: 100%;
+      max-width: 650px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--surface-card);
+      border: 1px solid color-mix(in oklch, var(--text-primary) 15%, transparent);
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 768px) {
+      html, body {
+        overflow-x: hidden !important;
+        width: 100vw !important;
+      }
+      .admin-navbar {
+        padding: 10px 12px;
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+      .admin-navbar-inner {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      .admin-navbar-brand {
+        justify-content: center;
+      }
+      .admin-navbar-brand .brand-sub {
+        display: none;
+      }
+      .admin-navbar-brand .brand-title {
+        font-size: var(--fs-sm);
+        text-align: center;
+      }
+      .admin-navbar-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        width: 100%;
+      }
+      #user-nav-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .admin-nav-btn {
+        height: 34px;
+        padding: 0 10px;
+        font-size: 0.72rem;
+      }
+      .db-status-pill {
+        height: 34px;
+        padding: 0 10px;
+        font-size: 0.7rem;
+      }
+      .admin-container {
+        padding: 16px 8px;
+      }
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .stat-badge-card {
+        padding: 12px;
+        gap: 10px;
+      }
+      .stat-badge-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.4rem;
+      }
+      .admin-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .admin-tab-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+      }
+      .action-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .action-header h3 {
+        text-align: center;
+      }
+      .action-header > div {
+        flex-direction: column;
+        width: 100%;
+      }
+      .action-header button {
+        width: 100%;
+        justify-content: center;
+      }
+      .custom-table th, .custom-table td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+      .modal-box {
+        padding: 16px;
+        max-height: 94vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .stat-badge-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+      }
+    }
+
+    /* Light Theme Fixes in Admin */
+    [data-theme="light"] body {
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    [data-theme="light"] .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      color: #0f172a;
+    }
+    [data-theme="light"] .custom-table {
+      color: #0f172a;
+    }
+    [data-theme="light"] .custom-table th {
+      background: rgba(0, 0, 0, 0.03);
+      color: #b45309;
+    }
+    [data-theme="light"] .form-input {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Admin Navbar -->
+  <header class="admin-navbar">
+    <div class="container admin-navbar-inner">
+      <a href="index.html" class="admin-navbar-brand">
+        <img src="assets/images/logo-menoufia.jpeg" alt="لوجو اتحاد طلاب تحيا مصر بالمنوفية">
+        <div class="brand-text">
+          <span class="brand-title">لوحة التحكم الإدارية</span>
+          <span class="brand-sub">اتحاد طلاب تحيا مصر - المنوفية</span>
+        </div>
+      </a>
+
+      <div class="admin-navbar-actions">
+        <button class="admin-nav-btn theme-toggle" id="theme-toggle" aria-label="تغيير المظهر" title="تغيير المظهر">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <div id="user-nav-actions" style="display: none; align-items: center; gap: 10px;">
+          <div class="db-status-pill online" id="stat-db-status">
+            <span class="status-pulse"></span> Supabase Cloud متصل
+          </div>
+          <button id="logout-btn" class="admin-nav-btn" style="color: #e74c3c; border-color: rgba(231, 76, 60, 0.35); background: rgba(231, 76, 60, 0.08);">
+            🚪 خروج
+          </button>
+        </div>
+        <a href="index.html" class="btn btn--primary btn--sm" style="height: 38px; display: inline-flex; align-items: center; gap: 6px; padding: 0 16px; border-radius: 10px; font-weight: var(--fw-bold);">
+          <span>←</span> العودة للموقع
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-container">
+    
+    <!-- 🔒 1. LOGIN SECTION (Shown when logged out) -->
+    <section id="auth-section" class="login-wrapper">
+      <div class="glass-card login-card">
+        <img src="assets/images/logo-menoufia.jpeg" alt="Logo" class="logo-img">
+        <h2>تسجيل دخول المديرين</h2>
+        <p style="margin-bottom: var(--sp-lg); font-size: var(--fs-sm);">
+          قم بتسجيل الدخول للتحكم في أخبار وفعاليات الموقع
+        </p>
+
+        <form id="login-form">
+          <div class="form-group" style="margin-bottom: var(--sp-md); text-align: right;">
+            <label class="form-label" for="login-email">البريد الإلكتروني</label>
+            <input type="email" id="login-email" class="form-input" placeholder="admin@tmsu.eg" required>
+          </div>
+
+          <div class="form-group" style="margin-bottom: var(--sp-lg); text-align: right;">
+            <label class="form-label" for="login-password">كلمة المرور</label>
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full" style="padding: var(--sp-md); font-size: var(--fs-base);">
+            دخول لوحة التحكم
+          </button>
+        </form>
+
+        <div class="demo-notice">
+          💡 <strong>وضع المعاينة التجريبي:</strong><br>
+          البريد الإلكتروني: <code>admin@tmsu.eg</code><br>
+          كلمة المرور: <code>admin123</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📊 2. DASHBOARD MAIN SECTION (Shown when logged in) -->
+    <section id="dashboard-section" style="display: none;">
+      
+      <!-- Stats Overview -->
+      <div class="stats-row">
+        <div class="stat-badge-card">
+          <div class="stat-badge-icon">📰</div>
+          <div>
+            <div style="font-size: var(--fs-2xl); font-weight: var(--fw-black);" id="stat-news-count">0</div>
+            <div style="color: var(--text-secondary); font-size: var(--fs-xs);">الأخبار المنشورة</div>
+          </div>
+        </div>
+
+        <div class="stat-badge-card">
+          <div class="stat-badge-icon">📅</div>
+          <div>
+            <div style="font-size: var(--fs-2xl); font-weight: var(--fw-black);" id="stat-events-count">0</div>
+            <div style="color: var(--text-secondary); font-size: var(--fs-xs);">الفعاليات والأنشطة</div>
+          </div>
+        </div>
+
+        <div class="stat-badge-card">
+          <div class="stat-badge-icon">🙋‍♂️</div>
+          <div>
+            <div style="font-size: var(--fs-2xl); font-weight: var(--fw-black);" id="stat-join-count">0</div>
+            <div style="color: var(--text-secondary); font-size: var(--fs-xs);">طلبات الانضمام</div>
+          </div>
+        </div>
+
+        <div class="stat-badge-card">
+          <div class="stat-badge-icon">✉️</div>
+          <div>
+            <div style="font-size: var(--fs-2xl); font-weight: var(--fw-black);" id="stat-contact-count">0</div>
+            <div style="color: var(--text-secondary); font-size: var(--fs-xs);">رسائل تواصل معنا</div>
+          </div>
+        </div>
+
+        <div class="stat-badge-card">
+          <div class="stat-badge-icon">🌟</div>
+          <div>
+            <div style="font-size: var(--fs-2xl); font-weight: var(--fw-black);" id="stat-top-count">0</div>
+            <div style="color: var(--text-secondary); font-size: var(--fs-xs);">أعضاء متميزين</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" data-tab="tab-news">
+          <span>📰</span> إدارة الأخبار
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-events">
+          <span>📅</span> إدارة الفعاليات
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-join">
+          <span>🙋‍♂️</span> طلبات الانضمام
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-contact">
+          <span>✉️</span> رسائل تواصل معنا
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-board">
+          <span>👑</span> إدارة الهيكل القيادي
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-top-members">
+          <span>🌟</span> أعضاء الشهر المميزين
+        </button>
+      </div>
+
+      <!-- TAB 1: NEWS MANAGEMENT -->
+      <div id="tab-news" class="tab-content">
+        <div class="action-header">
+          <h3>الأخبار المنشورة</h3>
+          <div style="display: flex; gap: 10px;">
+            <button id="clear-all-data-btn" class="btn btn--outline" style="color: #e74c3c; border-color: #e74c3c;">
+              🗑️ مسح كل الأخبار والفعاليات
+            </button>
+            <button id="open-news-modal-btn" class="btn btn--primary">
+              ➕ إضافة خبر جديد
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card data-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>الصورة</th>
+                <th>العنوان</th>
+                <th>التصنيف</th>
+                <th>خبر بارز</th>
+                <th>التاريخ</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="news-table-body">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-secondary);">جاري تحميل الأخبار...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 2: EVENTS MANAGEMENT -->
+      <div id="tab-events" class="tab-content" style="display: none;">
+        <div class="action-header">
+          <h3>الفعاليات والأنشطة</h3>
+          <button id="open-event-modal-btn" class="btn btn--primary">
+            ➕ إضافة فعالية جديدة
+          </button>
+        </div>
+
+        <div class="glass-card data-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>الصورة</th>
+                <th>عنوان الفعالية</th>
+                <th>التاريخ</th>
+                <th>المكان</th>
+                <th>التصنيف</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="events-table-body">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-secondary);">جاري تحميل الفعاليات...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 3: JOIN APPLICATIONS -->
+      <div id="tab-join" class="tab-content" style="display: none;">
+        <div class="action-header">
+          <h3>طلبات الانضمام المقدمة</h3>
+          <button id="export-join-btn" class="btn btn--outline btn--sm" style="color: #2ecc71; border-color: rgba(46, 204, 113, 0.4); background: rgba(46, 204, 113, 0.1); font-weight: bold; height: 38px; display: inline-flex; align-items: center; gap: 6px;">
+            📊 تصدير إلى إكسيل (Excel)
+          </button>
+        </div>
+
+        <div class="glass-card data-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>الاسم بالكامل</th>
+                <th>رقم الهاتف</th>
+                <th>البريد الإلكتروني</th>
+                <th>الجامعة / الكلية</th>
+                <th>اللجنة المطلوبة</th>
+                <th>التاريخ</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="join-table-body">
+              <tr>
+                <td colspan="7" style="text-align: center; color: var(--text-secondary);">جاري تحميل طلبات الانضمام...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 4: CONTACT MESSAGES -->
+      <div id="tab-contact" class="tab-content" style="display: none;">
+        <div class="action-header">
+          <h3>رسائل واستفسارات تواصل معنا</h3>
+          <button id="export-contact-btn" class="btn btn--outline btn--sm" style="color: #2ecc71; border-color: rgba(46, 204, 113, 0.4); background: rgba(46, 204, 113, 0.1); font-weight: bold; height: 38px; display: inline-flex; align-items: center; gap: 6px;">
+            📊 تصدير إلى إكسيل (Excel)
+          </button>
+        </div>
+
+        <div class="glass-card data-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>اسم الراسل</th>
+                <th>البريد الإلكتروني</th>
+                <th>رقم الهاتف</th>
+                <th>الموضوع</th>
+                <th>التاريخ</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="contact-table-body">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-secondary);">جاري تحميل الرسائل...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 5: BOARD MEMBERS MANAGEMENT -->
+      <div id="tab-board" class="tab-content" style="display: none;">
+        <div class="action-header">
+          <h3>إدارة الهيكل القيادي والبورد (المحافظة واللجان)</h3>
+          <button id="add-board-btn" class="btn btn--primary btn--sm">+ إضافة قائد جديد للبورد</button>
+        </div>
+
+        <div class="glass-card data-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>الصورة</th>
+                <th>اسم القائد</th>
+                <th>المنصب القيادي</th>
+                <th>المستوى القيادي</th>
+                <th>اللجنة / المكتب</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="board-table-body">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-secondary);">جاري تحميل الهيكل القيادي...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 6: TOP MEMBERS (أعضاء الشهر المميزين) -->
+      <div id="tab-top-members" class="tab-content" style="display: none;">
+        <div class="action-header">
+          <h3>🏆 لوحة الشرف وأعضاء الشهر المتميزين باللجان</h3>
+          <button id="open-top-modal-btn" class="btn btn--primary">
+            ➕ إضافة عضو متميز جديد
+          </button>
+        </div>
+
+        <div class="glass-card data-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>الصورة</th>
+                <th>اسم العضو المتميز</th>
+                <th>اللجنة / الدور</th>
+                <th>شهر / فترة التكريم</th>
+                <th>سبب التكريم والتميز</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="top-table-body">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-secondary);">جاري تحميل أعضاء لوحة الشرف...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- 📝 MODAL: ADD/EDIT NEWS -->
+  <div class="modal-overlay" id="news-modal">
+    <div class="glass-card modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-lg);">
+        <h3 id="news-modal-title">إضافة خبر جديد</h3>
+        <button class="btn btn--outline btn--sm close-modal-btn">&times;</button>
+      </div>
+
+      <form id="news-form">
+        <input type="hidden" id="news-id">
+        
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">العنوان بالعربية *</label>
+          <input type="text" id="news-title-ar" class="form-input" required placeholder="أدخل عنوان الخبر بالعربية">
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">العنوان بالإنجليزية (اختياري)</label>
+          <input type="text" id="news-title-en" class="form-input" placeholder="Title in English">
+        </div>
+
+        <div class="form-grid" style="margin-bottom: var(--sp-md);">
+          <div class="form-group">
+            <label class="form-label">التصنيف</label>
+            <select id="news-category" class="form-input">
+              <option value="مؤتمرات">مؤتمرات</option>
+              <option value="ورش عمل">ورش عمل</option>
+              <option value="مبادرات">مبادرات</option>
+              <option value="شراكات">شراكات</option>
+              <option value="أخبار">أخبار</option>
+            </select>
+          </div>
+          <div class="form-group" style="display: flex; align-items: center; gap: var(--sp-xs); margin-top: 25px;">
+            <input type="checkbox" id="news-is-featured">
+            <label for="news-is-featured" style="cursor: pointer; color: var(--text-primary);">خبر بارز في الرئيسية</label>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">صورة الخبر (رفع من جهازك أو إضافة رابط)</label>
+          <input type="file" id="news-file-input" class="form-input" accept="image/*" style="margin-bottom: 8px;">
+          <input type="url" id="news-image" class="form-input" placeholder="أو أدخل رابط صورة مباشرة (URL)">
+          <div id="news-preview-container" style="margin-top: 10px; display: none; text-align: center;">
+            <img id="news-preview-img" src="" alt="معاينة الصورة" style="max-height: 120px; border-radius: var(--radius-md); border: 2px solid var(--clr-accent); object-fit: cover;">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-lg);">
+          <label class="form-label">تفاصيل الخبر بالعربية *</label>
+          <textarea id="news-content-ar" class="form-input" rows="5" required placeholder="اكتب تفاصيل الخبر هنا..."></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: var(--sp-md);">
+          <button type="button" class="btn btn--outline close-modal-btn">إلغاء</button>
+          <button type="submit" class="btn btn--primary">حفظ الخبر</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 📅 MODAL: ADD/EDIT EVENT -->
+  <div class="modal-overlay" id="event-modal">
+    <div class="glass-card modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-lg);">
+        <h3 id="event-modal-title">إضافة فعالية جديدة</h3>
+        <button class="btn btn--outline btn--sm close-modal-btn">&times;</button>
+      </div>
+
+      <form id="event-form">
+        <input type="hidden" id="event-id">
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">عنوان الفعالية بالعربية *</label>
+          <input type="text" id="event-title-ar" class="form-input" required placeholder="أدخل عنوان الفعالية">
+        </div>
+
+        <div class="form-grid" style="margin-bottom: var(--sp-md);">
+          <div class="form-group">
+            <label class="form-label">تاريخ الفعالية *</label>
+            <input type="date" id="event-date" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">التصنيف</label>
+            <select id="event-category" class="form-input">
+              <option value="ورش عمل">ورش عمل</option>
+              <option value="مؤتمرات">مؤتمرات</option>
+              <option value="مبادرات مجتمعية">مبادرات مجتمعية</option>
+              <option value="ندوات">ندوات</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">مكان الإقامة بالعربية</label>
+          <input type="text" id="event-location-ar" class="form-input" placeholder="مثال: شبين الكوم - المنوفية">
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">صورة الفعالية (رفع من جهازك أو إضافة رابط)</label>
+          <input type="file" id="event-file-input" class="form-input" accept="image/*" style="margin-bottom: 8px;">
+          <input type="url" id="event-image" class="form-input" placeholder="أو أدخل رابط صورة مباشرة (URL)">
+          <div id="event-preview-container" style="margin-top: 10px; display: none; text-align: center;">
+            <img id="event-preview-img" src="" alt="معاينة الصورة" style="max-height: 120px; border-radius: var(--radius-md); border: 2px solid var(--clr-accent); object-fit: cover;">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-lg);">
+          <label class="form-label">وصف الفعالية بالعربية *</label>
+          <textarea id="event-desc-ar" class="form-input" rows="4" required placeholder="أدخل تفاصيل ووصف الفعالية..."></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: var(--sp-md);">
+          <button type="button" class="btn btn--outline close-modal-btn">إلغاء</button>
+          <button type="submit" class="btn btn--primary">حفظ الفعالية</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 🔍 MODAL: VIEW DETAILS (JOIN & CONTACT) -->
+  <div class="modal-overlay" id="details-modal">
+    <div class="glass-card modal-box" style="max-width: 600px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-lg); border-bottom: 1px solid color-mix(in oklch, var(--text-primary) 10%, transparent); padding-bottom: var(--sp-sm);">
+        <h3 id="details-modal-title">تفاصيل الطلب</h3>
+        <button class="btn btn--outline btn--sm close-modal-btn">&times;</button>
+      </div>
+
+      <div id="details-modal-content" style="color: var(--text-primary); line-height: var(--lh-relaxed);">
+        <!-- Populated via JS -->
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; margin-top: var(--sp-lg);">
+        <button type="button" class="btn btn--primary close-modal-btn">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 👑 MODAL: ADD/EDIT BOARD MEMBER -->
+  <div class="modal-overlay" id="board-modal">
+    <div class="glass-card modal-box" style="max-width: 600px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-lg);">
+        <h3 id="board-modal-title">إضافة قائد جديد للبورد</h3>
+        <button class="btn btn--outline btn--sm close-modal-btn">&times;</button>
+      </div>
+
+      <form id="board-form">
+        <input type="hidden" id="board-id">
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">اسم القائد بالكامل *</label>
+          <input type="text" id="board-name" class="form-input" required placeholder="مثال: د. خالد عبد السلام">
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">المنصب القيادي *</label>
+          <input type="text" id="board-title" class="form-input" required placeholder="مثال: منسق عام المحافظة / رئيس لجنة الموارد البشرية">
+        </div>
+
+        <div class="form-grid" style="margin-bottom: var(--sp-md); display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label">المستوى القيادي *</label>
+            <select id="board-level" class="form-input">
+              <option value="1">1 - مجلس إدارة الاتحاد (رئيس / نواب الاتحاد)</option>
+              <option value="2">2 - مجلس إدارة محافظة المنوفية (منسق عام / نائب منسق)</option>
+              <option value="3">3 - المكتب التنفيذي لمحافظة المنوفية (رؤساء ونواب اللجان والمكاتب)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">اللجنة / المكتب *</label>
+            <select id="board-committee" class="form-input">
+              <option value="مجلس إدارة الاتحاد">مجلس إدارة الاتحاد</option>
+              <option value="مجلس إدارة محافظة المنوفية">مجلس إدارة محافظة المنوفية</option>
+              <option value="المكتب التنفيذي لمحافظة المنوفية">المكتب التنفيذي لمحافظة المنوفية</option>
+              <option value="لجنة الموارد البشرية">لجنة الموارد البشرية</option>
+              <option value="لجنة العلاقات العامة والدولية">لجنة العلاقات العامة والدولية</option>
+              <option value="لجنة التنظيم والمراسم">لجنة التنظيم والمراسم</option>
+              <option value="لجنة التدريب والتطوير">لجنة التدريب والتطوير</option>
+              <option value="المكتب الإعلامي">المكتب الإعلامي</option>
+              <option value="لجنة التخطيط والمتابعة">لجنة التخطيط والمتابعة</option>
+              <option value="مكتب المبادرات والمشروعات">مكتب المبادرات والمشروعات</option>
+              <option value="المكتب الفني">المكتب الفني</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">صورة القائد (رفع من جهازك أو إضافة رابط)</label>
+          <input type="file" id="board-file-input" class="form-input" accept="image/*" style="margin-bottom: 8px;">
+          <input type="url" id="board-image" class="form-input" placeholder="أو أدخل رابط صورة مباشرة (URL)">
+          <div id="board-preview-container" style="margin-top: 10px; display: none; text-align: center;">
+            <img id="board-preview-img" src="" alt="معاينة الصورة" style="max-height: 100px; width: 100px; border-radius: 50%; border: 2px solid var(--clr-accent); object-fit: cover;">
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-bottom: var(--sp-lg); display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label">رقم الهاتف / الواتساب</label>
+            <input type="tel" id="board-phone" class="form-input" placeholder="01012345678">
+          </div>
+          <div class="form-group">
+            <label class="form-label">البريد الإلكتروني أو لينكدإن</label>
+            <input type="text" id="board-linkedin" class="form-input" placeholder="linkedin or email">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: var(--sp-md);">
+          <button type="button" class="btn btn--outline close-modal-btn">إلغاء</button>
+          <button type="submit" class="btn btn--primary">حفظ البيانات القيادية</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 🌟 MODAL: ADD/EDIT TOP MEMBER -->
+  <div class="modal-overlay" id="top-member-modal">
+    <div class="glass-card modal-box" style="max-width: 600px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-lg);">
+        <h3 id="top-modal-title">إضافة عضو متميز جديد لوحة الشرف</h3>
+        <button class="btn btn--outline btn--sm close-modal-btn">&times;</button>
+      </div>
+
+      <form id="top-member-form">
+        <input type="hidden" id="top-id">
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">اسم العضو المتميز بالكامل *</label>
+          <input type="text" id="top-name" class="form-input" required placeholder="مثال: م. كريم العفيفي">
+        </div>
+
+        <div class="form-grid" style="margin-bottom: var(--sp-md); display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label">اللجنة / الدور القيادي *</label>
+            <input type="text" id="top-committee" class="form-input" required placeholder="مثال: لجنة الموارد البشرية">
+          </div>
+          <div class="form-group">
+            <label class="form-label">شهر / فترة التكريم *</label>
+            <input type="text" id="top-month" class="form-input" required placeholder="مثال: يوليو 2026">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-md);">
+          <label class="form-label">صورة العضو (رفع من جهازك أو إضافة رابط)</label>
+          <input type="file" id="top-file-input" class="form-input" accept="image/*" style="margin-bottom: 8px;">
+          <input type="url" id="top-image" class="form-input" placeholder="أو أدخل رابط صورة مباشرة (URL)">
+          <div id="top-preview-container" style="margin-top: 10px; display: none; text-align: center;">
+            <img id="top-preview-img" src="" alt="معاينة الصورة" style="max-height: 90px; width: 90px; border-radius: 50%; border: 2px solid var(--clr-accent); object-fit: cover;">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--sp-lg);">
+          <label class="form-label">سبب التكريم وإنجازات العضو *</label>
+          <textarea id="top-achievement" class="form-input" rows="3" required placeholder="مثال: التميز الإستثنائي في تنظيم الفعاليات وتطوير أدوات العمل باللجنة"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: var(--sp-md);">
+          <button type="button" class="btn btn--outline close-modal-btn">إلغاء</button>
+          <button type="submit" class="btn btn--primary">حفظ بيانات التكريم 🏆</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ⚠️ CUSTOM GLASSMORPHIC ALERT & CONFIRM DIALOG MODAL -->
+  <div class="modal-overlay" id="custom-dialog-modal" style="z-index: 3000;">
+    <div class="glass-card modal-box" style="max-width: 440px; text-align: center; padding: 32px 24px; border-radius: var(--radius-2xl); border: 1px solid color-mix(in oklch, var(--text-primary) 15%, transparent); box-shadow: var(--shadow-xl);">
+      <div id="dialog-icon" style="font-size: 3.5rem; margin-bottom: 12px;">⚠️</div>
+      <h3 id="dialog-title" style="font-size: var(--fs-xl); font-weight: 800; color: var(--text-primary); margin-bottom: 10px;">تأكيد الإجراء</h3>
+      <p id="dialog-message" style="color: var(--text-secondary); font-size: var(--fs-base); line-height: 1.6; margin-bottom: 26px;">هل أنت متأكد من تنفيذ هذا الإجراء؟</p>
+
+      <div id="dialog-actions" style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <button id="dialog-cancel-btn" class="btn btn--outline" style="min-width: 120px; font-weight: bold;">إلغاء</button>
+        <button id="dialog-confirm-btn" class="btn btn--primary" style="min-width: 140px; font-weight: bold; background: linear-gradient(135deg, #e74c3c, #c0392b); border-color: #e74c3c;">تأكيد الحذف 🗑️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
