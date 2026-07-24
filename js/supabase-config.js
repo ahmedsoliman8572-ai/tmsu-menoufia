@@ -12,38 +12,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // Default fallback arrays
 const FALLBACK_NEWS = [];
 const FALLBACK_EVENTS = [];
-const FALLBACK_BOARD_MEMBERS = [
-  {
-    id: "b1",
-    name: "مصطفي قطامش",
-    title: "رئيس الاتحاد",
-    role_level: 1,
-    committee: "مجلس إدارة الاتحاد",
-    image_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-    phone: "",
-    linkedin: ""
-  },
-  {
-    id: "b2",
-    name: "ناصر زغلان",
-    title: "نائب رئيس الاتحاد",
-    role_level: 1,
-    committee: "مجلس إدارة الاتحاد",
-    image_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-    phone: "",
-    linkedin: ""
-  },
-  {
-    id: "b3",
-    name: "عبدالرحمن البربري",
-    title: "نائب رئيس الاتحاد",
-    role_level: 1,
-    committee: "مجلس إدارة الاتحاد",
-    image_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-    phone: "",
-    linkedin: ""
-  }
-];
+const FALLBACK_BOARD_MEMBERS = [];
 const FALLBACK_TOP_MEMBERS = [];
 
 // LocalStorage Persistence Helpers for Demo/Offline Mode
