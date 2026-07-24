@@ -1580,7 +1580,7 @@
   color: #334155 !important;
   font-weight: 500 !important;
 }
-[data-theme="light"] .navbar {
+[data-theme="light"] .navbar.scrolled {
   background: rgba(255, 255, 255, 0.94) !important;
   backdrop-filter: blur(16px) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
