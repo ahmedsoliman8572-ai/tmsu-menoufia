@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-lang="ar" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="لوحة الشرف وتكريم أعضاء الشهر المتميزين في لجان ومكاتب اتحاد طلاب تحيا مصر بمحافظة المنوفية">
+  <meta name="theme-color" content="#1A1A2E">
+  <title>لوحة الشرف والتميز - اتحاد طلاب تحيا مصر المنوفية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="icon" type="image/jpeg" href="assets/images/logo-menoufia.jpeg">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <img src="assets/images/logo-menoufia.jpeg" alt="TMSU Menoufia">
+        <div class="brand-text">
+          <span class="brand-name" data-i18n="hero.title">اتحاد طلاب تحيا مصر</span>
+          <span class="brand-sub" data-i18n="hero.subtitle">محافظة المنوفية</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links" role="menubar">
+        <li role="none"><a href="index.html" class="nav-link" role="menuitem" data-i18n="nav.home">الرئيسية</a></li>
+        <li role="none"><a href="about.html" class="nav-link" role="menuitem" data-i18n="nav.about">من نحن</a></li>
+        <li role="none"><a href="board.html" class="nav-link" role="menuitem" data-i18n="nav.board">الهيكل القيادي</a></li>
+        <li role="none"><a href="structure.html" class="nav-link" role="menuitem" data-i18n="nav.structure">اللجان</a></li>
+        <li role="none"><a href="honor-board.html" class="nav-link active" role="menuitem" data-i18n="nav.honor">لوحة الشرف</a></li>
+        <li role="none"><a href="events.html" class="nav-link" role="menuitem" data-i18n="nav.events">الفعاليات</a></li>
+        <li role="none"><a href="news.html" class="nav-link" role="menuitem" data-i18n="nav.news">الأخبار</a></li>
+        <li role="none"><a href="join.html" class="nav-link" role="menuitem" data-i18n="nav.join">انضم إلينا</a></li>
+        <li role="none"><a href="contact.html" class="nav-link" role="menuitem" data-i18n="nav.contact">تواصل معنا</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="lang-toggle" data-i18n="lang.switch">English</button>
+        <button class="theme-toggle">🌙</button>
+        <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
+      </div>
+      <div class="nav-overlay" id="nav-overlay"></div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="container page-header-content">
+      <h1 class="page-title reveal">🏆 لوحة الشرف وأعضاء الشهر المتميزين</h1>
+      <nav class="page-breadcrumb reveal">
+        <a href="index.html" data-i18n="nav.home">الرئيسية</a>
+        <span>/</span>
+        <span>لوحة الشرف والتميز</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 🌟 HONOR BOARD SHOWCASE SECTION -->
+  <section class="section" id="honor-board-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-subtitle">وسام التميز والعطاء</span>
+        <h2 class="section-title">أعضاء الشهر المتميزين باللجان</h2>
+        <p class="section-desc">
+          تكريم وتوثيق تميز الأعضاء الأكثر نشاطاً وإسهاماً في تحقيق أهداف وتطلعات اتحاد طلاب تحيا مصر بمحافظة المنوفية
+        </p>
+      </div>
+
+      <!-- Dynamic Top Members Grid Container -->
+      <div id="dynamic-top-members-container" class="grid grid-3" style="gap: 32px; justify-content: center;">
+        <!-- Rendered dynamically via JS -->
+      </div>
+
+      <!-- 💡 MOTIVATION & NOMINATION CALLOUT -->
+      <div class="reveal mt-3xl" style="background: var(--surface-card); border: 1px dashed color-mix(in oklch, #f1c40f 40%, transparent); border-radius: var(--radius-2xl); padding: var(--sp-2xl); text-align: center; max-width: 800px; margin: 48px auto 0; box-shadow: var(--shadow-lg);">
+        <div style="font-size: 3rem; margin-bottom: 12px;">🎖️</div>
+        <h3 style="font-size: var(--fs-xl); font-weight: 800; color: var(--text-primary); margin-bottom: 8px;">كيف تكون عضواً متميزاً في لوحة الشرف؟</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; font-size: var(--fs-md); margin-bottom: var(--sp-lg);">
+          يتم ترشيح أعضاء لوحة الشرف شهرياً بناءً على مستوى الالتزام، التواجد بالفعاليات، ابتكار المبادرات، وروح العمل الجماعي داخل أمانات ولجان المحافظة. اجتهد وكن أنت النجم القادم!
+        </p>
+        <a href="join.html" class="btn btn--primary ripple-effect" style="border-radius: 50px; padding: 12px 30px; font-weight: bold;">
+          انضم إلينا وشاركتنا التميز 🚀
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand reveal">
+          <img src="assets/images/logo-menoufia.jpeg" alt="TMSU Menoufia">
+          <p data-i18n="footer.about">اتحاد طلاب تحيا مصر - محافظة المنوفية، كيان شبابي يعمل على تطوير وتمكين الشباب المصري.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/TahyaMasrStudentsUnionMNF/?locale=ar_AR" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="mailto:tmsu.menoufia@gmail.com" aria-label="Email">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <h4 class="footer-heading" data-i18n="footer.links">روابط سريعة</h4>
+          <div class="footer-links">
+            <a href="index.html" data-i18n="nav.home">الرئيسية</a>
+            <a href="about.html" data-i18n="nav.about">من نحن</a>
+            <a href="board.html" data-i18n="nav.board">الهيكل القيادي</a>
+            <a href="structure.html" data-i18n="nav.structure">اللجان</a>
+            <a href="honor-board.html" data-i18n="nav.honor">لوحة الشرف</a>
+            <a href="events.html" data-i18n="nav.events">الفعاليات</a>
+            <a href="news.html" data-i18n="nav.news">الأخبار</a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <h4 class="footer-heading" data-i18n="footer.committees">اللجان</h4>
+          <div class="footer-links">
+            <a href="structure.html" data-i18n="committee.hr.name">الموارد البشرية</a>
+            <a href="structure.html" data-i18n="committee.pr.name">العلاقات العامة والدولية</a>
+            <a href="structure.html" data-i18n="committee.training.name">التدريب والتطوير</a>
+            <a href="structure.html" data-i18n="committee.media.name">المكتب الإعلامي</a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <h4 class="footer-heading" data-i18n="footer.contact">تواصل معنا</h4>
+          <div class="footer-contact-info">
+            <p>📍 المنوفية، شبين الكوم</p>
+            <p>📧 tmsu.menoufia@gmail.com</p>
+            <p>🏛️ تحت مظلة وزارة الشباب والرياضة</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p data-i18n="footer.copyright">جميع الحقوق محفوظة © 2026 اتحاد طلاب تحيا مصر - المنوفية</p>
+        <div class="footer-partner-logos">
+          <img src="assets/images/logo-ministry.jpeg" alt="وزارة الشباب والرياضة">
+          <img src="assets/images/logo-main.jpeg" alt="اتحاد طلاب تحيا مصر">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

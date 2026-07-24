@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-lang="ar" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="تعرف على اتحاد طلاب تحيا مصر - محافظة المنوفية، رسالتنا، رؤيتنا، وقيمنا الأساسية">
+  <meta property="og:title" content="من نحن - اتحاد طلاب تحيا مصر المنوفية">
+  <meta name="theme-color" content="#1A1A2E">
+  <title>من نحن - اتحاد طلاب تحيا مصر المنوفية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="icon" type="image/jpeg" href="assets/images/logo-menoufia.jpeg">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <img src="assets/images/logo-menoufia.jpeg" alt="TMSU Menoufia">
+        <div class="brand-text">
+          <span class="brand-name" data-i18n="hero.title">اتحاد طلاب تحيا مصر</span>
+          <span class="brand-sub" data-i18n="hero.subtitle">محافظة المنوفية</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links" role="menubar">
+        <li role="none"><a href="index.html" class="nav-link" role="menuitem" data-i18n="nav.home">الرئيسية</a></li>
+        <li role="none"><a href="about.html" class="nav-link active" role="menuitem" data-i18n="nav.about">من نحن</a></li>
+        <li role="none"><a href="board.html" class="nav-link" role="menuitem" data-i18n="nav.board">الهيكل القيادي</a></li>
+        <li role="none"><a href="structure.html" class="nav-link" role="menuitem" data-i18n="nav.structure">اللجان</a></li>
+        <li role="none"><a href="honor-board.html" class="nav-link" role="menuitem" data-i18n="nav.honor">لوحة الشرف</a></li>
+        <li role="none"><a href="events.html" class="nav-link" role="menuitem" data-i18n="nav.events">الفعاليات</a></li>
+        <li role="none"><a href="news.html" class="nav-link" role="menuitem" data-i18n="nav.news">الأخبار</a></li>
+        <li role="none"><a href="join.html" class="nav-link" role="menuitem" data-i18n="nav.join">انضم إلينا</a></li>
+        <li role="none"><a href="contact.html" class="nav-link" role="menuitem" data-i18n="nav.contact">تواصل معنا</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="lang-toggle" data-i18n="lang.switch">English</button>
+        <button class="theme-toggle">🌙</button>
+        <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
+      </div>
+      <div class="nav-overlay" id="nav-overlay"></div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="container page-header-content">
+      <h1 class="page-title reveal" data-i18n="about.section.title">من نحن</h1>
+      <nav class="page-breadcrumb reveal" aria-label="Breadcrumb">
+        <a href="index.html" data-i18n="nav.home">الرئيسية</a>
+        <span>/</span>
+        <span data-i18n="nav.about">من نحن</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ABOUT CONTENT -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2" style="align-items: center; gap: var(--sp-3xl);">
+        <div class="reveal">
+          <p style="font-size: var(--fs-md); color: var(--text-secondary); line-height: var(--lh-relaxed); margin-bottom: var(--sp-xl);" data-i18n="about.parent.desc">
+            يعمل اتحاد طلاب تحيا مصر - محافظة المنوفية كفرع محلي للاتحاد العام، ويخضع للإشراف المباشر من وزارة الشباب والرياضة ومديرية الشباب والرياضة بالمنوفية.
+          </p>
+          <div class="partners-bar">
+            <div class="partners-bar-item">
+              <img src="assets/images/logo-ministry.jpeg" alt="وزارة الشباب والرياضة">
+              <p data-i18n="about.parent.ministry">وزارة الشباب والرياضة</p>
+            </div>
+            <div class="partners-bar-item">
+              <img src="assets/images/logo-main.jpeg" alt="اتحاد طلاب تحيا مصر">
+              <p data-i18n="about.parent.union">اتحاد طلاب تحيا مصر</p>
+            </div>
+            <div class="partners-bar-item">
+              <img src="assets/images/logo-menoufia.jpeg" alt="فرع المنوفية">
+              <p data-i18n="about.parent.menoufia">اتحاد طلاب تحيا مصر - محافظة المنوفية</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal-left">
+          <div style="background: var(--surface-card); border-radius: var(--radius-2xl); padding: var(--sp-2xl); box-shadow: var(--shadow-md);">
+            <div class="stat-icon" style="font-size: 3rem; margin-bottom: var(--sp-md); text-align: center;">🏛️</div>
+            <h3 style="text-align: center; font-size: var(--fs-lg); margin-bottom: var(--sp-md); color: var(--text-primary);" data-i18n="about.parent.title">تحت مظلة</h3>
+            <p style="text-align: center; color: var(--clr-primary); font-weight: var(--fw-bold); font-size: var(--fs-md);" data-i18n="about.parent.union">اتحاد طلاب تحيا مصر</p>
+            <p style="text-align: center; color: var(--text-secondary); font-size: var(--fs-sm); margin-top: var(--sp-xs);" data-i18n="about.parent.ministry">وزارة الشباب والرياضة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="section" style="background: color-mix(in oklch, var(--surface-bg) 97%, var(--clr-primary));">
+    <div class="container">
+      <div class="grid grid-2" style="gap: var(--sp-2xl);">
+        <div class="card reveal hover-lift" style="padding: var(--sp-2xl);">
+          <div style="font-size: 2.5rem; margin-bottom: var(--sp-md);">🎯</div>
+          <h3 style="font-size: var(--fs-xl); margin-bottom: var(--sp-md); color: var(--text-primary);" data-i18n="about.mission.title">رسالتنا</h3>
+          <p style="color: var(--text-secondary); line-height: var(--lh-relaxed);" data-i18n="about.mission.text">
+            إعداد جيل من الشباب الواعي والقادر على القيادة والإبداع والمشاركة الفعّالة في العمل المجتمعي والتنموي، بما يتماشى مع رؤية الدولة المصرية لتمكين الشباب وبناء الجمهورية الجديدة.
+          </p>
+        </div>
+        <div class="card reveal hover-lift" style="padding: var(--sp-2xl);">
+          <div style="font-size: 2.5rem; margin-bottom: var(--sp-md);">🔭</div>
+          <h3 style="font-size: var(--fs-xl); margin-bottom: var(--sp-md); color: var(--text-primary);" data-i18n="about.vision.title">رؤيتنا</h3>
+          <p style="color: var(--text-secondary); line-height: var(--lh-relaxed);" data-i18n="about.vision.text">
+            أن نكون الكيان الشبابي الرائد في تأهيل وتمكين الشباب المصري ليكونوا قادة المستقبل وصناع التغيير الإيجابي في المجتمع.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-subtitle" data-i18n="about.values.title">قيمنا</span>
+        <h2 class="section-title" data-i18n="about.values.title">القيم الأساسية</h2>
+      </div>
+
+      <div class="grid grid-4 stagger-children">
+        <div class="card reveal hover-lift" style="padding: var(--sp-xl); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: var(--sp-sm);">👑</div>
+          <h4 style="margin-bottom: var(--sp-xs);" data-i18n="about.value.leadership">القيادة</h4>
+          <p class="card-text" data-i18n="about.value.leadership.desc">تطوير المهارات القيادية لدى الشباب وتأهيلهم لتحمل المسؤولية</p>
+        </div>
+        <div class="card reveal hover-lift" style="padding: var(--sp-xl); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: var(--sp-sm);">💡</div>
+          <h4 style="margin-bottom: var(--sp-xs);" data-i18n="about.value.innovation">الإبداع</h4>
+          <p class="card-text" data-i18n="about.value.innovation.desc">تشجيع التفكير الإبداعي والابتكار في حل المشكلات المجتمعية</p>
+        </div>
+        <div class="card reveal hover-lift" style="padding: var(--sp-xl); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: var(--sp-sm);">🤝</div>
+          <h4 style="margin-bottom: var(--sp-xs);" data-i18n="about.value.community">المجتمع</h4>
+          <p class="card-text" data-i18n="about.value.community.desc">تعزيز قيم التطوع والانتماء الوطني والمشاركة المجتمعية الفعّالة</p>
+        </div>
+        <div class="card reveal hover-lift" style="padding: var(--sp-xl); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: var(--sp-sm);">🚀</div>
+          <h4 style="margin-bottom: var(--sp-xs);" data-i18n="about.value.development">التنمية</h4>
+          <p class="card-text" data-i18n="about.value.development.desc">المساهمة في تحقيق التنمية المستدامة وبناء الجمهورية الجديدة</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (same as index) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand reveal">
+          <img src="assets/images/logo-menoufia.jpeg" alt="TMSU Menoufia">
+          <p data-i18n="footer.about">اتحاد طلاب تحيا مصر - محافظة المنوفية، كيان شبابي يعمل على تطوير وتمكين الشباب المصري.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/TahyaMasrStudentsUnionMNF/?locale=ar_AR" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="mailto:tmsu.menoufia@gmail.com" aria-label="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+          </div>
+        </div>
+        <div class="reveal">
+          <h4 class="footer-heading" data-i18n="footer.links">روابط سريعة</h4>
+          <div class="footer-links">
+            <a href="index.html" data-i18n="nav.home">الرئيسية</a>
+            <a href="about.html" data-i18n="nav.about">من نحن</a>
+            <a href="events.html" data-i18n="nav.events">الفعاليات</a>
+            <a href="join.html" data-i18n="nav.join">انضم إلينا</a>
+          </div>
+        </div>
+        <div class="reveal">
+          <h4 class="footer-heading" data-i18n="footer.committees">اللجان</h4>
+          <div class="footer-links">
+            <a href="structure.html" data-i18n="committee.hr.name">لجنة الموارد البشرية</a>
+            <a href="structure.html" data-i18n="committee.pr.name">العلاقات العامة</a>
+            <a href="structure.html" data-i18n="committee.training.name">التدريب والتطوير</a>
+          </div>
+        </div>
+        <div class="reveal">
+          <h4 class="footer-heading" data-i18n="footer.contact">تواصل معنا</h4>
+          <div class="footer-contact-item"><span class="contact-icon">📧</span><a href="mailto:tmsu.menoufia@gmail.com">tmsu.menoufia@gmail.com</a></div>
+          <div class="footer-contact-item"><span class="contact-icon">📍</span><span data-i18n="contact.address.value">محافظة المنوفية، مصر</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footer.copyright">جميع الحقوق محفوظة © 2025 اتحاد طلاب تحيا مصر - المنوفية</p>
+        <div class="footer-partner-logos">
+          <img src="assets/images/logo-ministry.jpeg" alt="Ministry"><img src="assets/images/logo-main.jpeg" alt="TMSU">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top">↑</button>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

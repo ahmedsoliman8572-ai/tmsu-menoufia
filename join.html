@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-lang="ar" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="انضم إلى اتحاد طلاب تحيا مصر - محافظة المنوفية وكن جزءاً من أكبر كيان شبابي في مصر">
+  <meta name="theme-color" content="#1A1A2E">
+  <title>انضم إلينا - اتحاد طلاب تحيا مصر المنوفية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="icon" type="image/jpeg" href="assets/images/logo-menoufia.jpeg">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <img src="assets/images/logo-menoufia.jpeg" alt="TMSU Menoufia">
+        <div class="brand-text">
+          <span class="brand-name" data-i18n="hero.title">اتحاد طلاب تحيا مصر</span>
+          <span class="brand-sub" data-i18n="hero.subtitle">محافظة المنوفية</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links" role="menubar">
+        <li role="none"><a href="index.html" class="nav-link" role="menuitem" data-i18n="nav.home">الرئيسية</a></li>
+        <li role="none"><a href="about.html" class="nav-link" role="menuitem" data-i18n="nav.about">من نحن</a></li>
+        <li role="none"><a href="board.html" class="nav-link" role="menuitem" data-i18n="nav.board">الهيكل القيادي</a></li>
+        <li role="none"><a href="structure.html" class="nav-link" role="menuitem" data-i18n="nav.structure">اللجان</a></li>
+        <li role="none"><a href="honor-board.html" class="nav-link" role="menuitem" data-i18n="nav.honor">لوحة الشرف</a></li>
+        <li role="none"><a href="events.html" class="nav-link" role="menuitem" data-i18n="nav.events">الفعاليات</a></li>
+        <li role="none"><a href="news.html" class="nav-link" role="menuitem" data-i18n="nav.news">الأخبار</a></li>
+        <li role="none"><a href="join.html" class="nav-link active" role="menuitem" data-i18n="nav.join">انضم إلينا</a></li>
+        <li role="none"><a href="contact.html" class="nav-link" role="menuitem" data-i18n="nav.contact">تواصل معنا</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="lang-toggle" data-i18n="lang.switch">English</button>
+        <button class="theme-toggle">🌙</button>
+        <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
+      </div>
+      <div class="nav-overlay" id="nav-overlay"></div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="container page-header-content">
+      <h1 class="page-title reveal" data-i18n="join.title">انضم إلى الاتحاد</h1>
+      <nav class="page-breadcrumb reveal">
+        <a href="index.html" data-i18n="nav.home">الرئيسية</a>
+        <span>/</span>
+        <span data-i18n="nav.join">انضم إلينا</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- BENEFITS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-subtitle" data-i18n="join.subtitle">كن جزءاً من فريقنا</span>
+        <h2 class="section-title" data-i18n="join.benefits.title">مميزات الانضمام</h2>
+      </div>
+
+      <div class="grid grid-3 stagger-children">
+        <div class="card reveal hover-lift hover-glow" style="padding: var(--sp-xl); text-align: center; border-top: 3px solid var(--clr-primary);">
+          <div style="width: 64px; height: 64px; margin: 0 auto var(--sp-md); border-radius: var(--radius-full); background: color-mix(in oklch, var(--clr-primary) 15%, transparent); display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">👑</div>
+          <p style="font-weight: var(--fw-bold); font-size: var(--fs-md); color: var(--text-primary); line-height: 1.4;" data-i18n="join.benefit1">تطوير المهارات القيادية والشخصية</p>
+        </div>
+        <div class="card reveal hover-lift hover-glow" style="padding: var(--sp-xl); text-align: center; border-top: 3px solid var(--clr-accent);">
+          <div style="width: 64px; height: 64px; margin: 0 auto var(--sp-md); border-radius: var(--radius-full); background: color-mix(in oklch, var(--clr-accent) 15%, transparent); display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">📜</div>
+          <p style="font-weight: var(--fw-bold); font-size: var(--fs-md); color: var(--text-primary); line-height: 1.4;" data-i18n="join.benefit2">شهادات معتمدة من وزارة الشباب والرياضة</p>
+        </div>
+        <div class="card reveal hover-lift hover-glow" style="padding: var(--sp-xl); text-align: center; border-top: 3px solid var(--clr-secondary);">
+          <div style="width: 64px; height: 64px; margin: 0 auto var(--sp-md); border-radius: var(--radius-full); background: color-mix(in oklch, var(--clr-secondary) 15%, transparent); display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">🎓</div>
+          <p style="font-weight: var(--fw-bold); font-size: var(--fs-md); color: var(--text-primary); line-height: 1.4;" data-i18n="join.benefit3">فرص تدريبية وتطويرية متميزة</p>
+        </div>
+        <div class="card reveal hover-lift hover-glow" style="padding: var(--sp-xl); text-align: center; border-top: 3px solid var(--clr-info);">
+          <div style="width: 64px; height: 64px; margin: 0 auto var(--sp-md); border-radius: var(--radius-full); background: color-mix(in oklch, var(--clr-info) 15%, transparent); display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">🌐</div>
+          <p style="font-weight: var(--fw-bold); font-size: var(--fs-md); color: var(--text-primary); line-height: 1.4;" data-i18n="join.benefit4">بناء شبكة علاقات مهنية واسعة</p>
+        </div>
+        <div class="card reveal hover-lift hover-glow" style="padding: var(--sp-xl); text-align: center; border-top: 3px solid var(--clr-success);">
+          <div style="width: 64px; height: 64px; margin: 0 auto var(--sp-md); border-radius: var(--radius-full); background: color-mix(in oklch, var(--clr-success) 15%, transparent); display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">🤝</div>
+          <p style="font-weight: var(--fw-bold); font-size: var(--fs-md); color: var(--text-primary); line-height: 1.4;" data-i18n="join.benefit5">المشاركة في مبادرات ومشروعات مجتمعية</p>
+        </div>
+        <div class="card reveal hover-lift hover-glow" style="padding: var(--sp-xl); text-align: center; border-top: 3px solid var(--clr-warning);">
+          <div style="width: 64px; height: 64px; margin: 0 auto var(--sp-md); border-radius: var(--radius-full); background: color-mix(in oklch, var(--clr-warning) 15%, transparent); display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">🏅</div>
+          <p style="font-weight: var(--fw-bold); font-size: var(--fs-md); color: var(--text-primary); line-height: 1.4;" data-i18n="join.benefit6">التمثيل في المحافل المحلية والدولية</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="section" style="background: color-mix(in oklch, var(--surface-bg) 97%, var(--clr-primary));">
+    <div class="container">
+      <div class="grid grid-2" style="gap: var(--sp-3xl); align-items: start;">
+        <!-- Form -->
+        <div class="reveal">
+          <div class="card" style="padding: var(--sp-2xl);">
+            <h3 style="font-size: var(--fs-xl); margin-bottom: var(--sp-xl); color: var(--text-primary);" data-i18n="join.form.title">استمارة الانضمام</h3>
+
+            <form id="join-form" novalidate>
+              <div class="form-group">
+                <label data-i18n="join.form.name">الاسم الكامل</label>
+                <input type="text" id="fullname" name="fullname" class="form-input" data-validate="required,minlength:3" data-i18n-placeholder="join.form.name.placeholder" placeholder="أدخل اسمك الكامل">
+                <span class="form-error"></span>
+              </div>
+
+              <div class="form-group">
+                <label data-i18n="join.form.email">البريد الإلكتروني</label>
+                <input type="email" id="email" name="email" class="form-input" data-validate="required,email" data-i18n-placeholder="join.form.email.placeholder" placeholder="أدخل بريدك الإلكتروني">
+                <span class="form-error"></span>
+              </div>
+
+              <div class="form-group">
+                <label data-i18n="join.form.phone">رقم الهاتف</label>
+                <input type="tel" id="phone" name="phone" class="form-input" data-validate="required,phone" data-i18n-placeholder="join.form.phone.placeholder" placeholder="أدخل رقم هاتفك">
+                <span class="form-error"></span>
+              </div>
+
+              <div class="grid grid-2" style="gap: var(--sp-md);">
+                <div class="form-group">
+                  <label data-i18n="join.form.age">العمر</label>
+                  <input type="number" id="age" name="age" class="form-input" data-validate="required,number" data-i18n-placeholder="join.form.age.placeholder" placeholder="العمر" min="15" max="35">
+                  <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                  <label data-i18n="join.form.university">الجامعة / الكلية</label>
+                  <input type="text" id="university" name="university" class="form-input" data-validate="required" data-i18n-placeholder="join.form.university.placeholder" placeholder="الجامعة والكلية">
+                  <span class="form-error"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label data-i18n="join.form.committee">اللجنة المفضلة</label>
+                <select id="committee" name="committee" class="form-select" data-validate="required,select">
+                  <option value="" data-i18n="join.form.committee.placeholder">اختر اللجنة</option>
+                  <option value="لجنة الموارد البشرية" data-i18n="committee.hr.name">لجنة الموارد البشرية</option>
+                  <option value="لجنة العلاقات العامة والدولية" data-i18n="committee.pr.name">لجنة العلاقات العامة والدولية</option>
+                  <option value="لجنة التنظيم والمراسم" data-i18n="committee.org.name">لجنة التنظيم والمراسم</option>
+                  <option value="لجنة التدريب والتطوير" data-i18n="committee.training.name">لجنة التدريب والتطوير</option>
+                  <option value="المكتب الإعلامي" data-i18n="committee.media.name">المكتب الإعلامي</option>
+                  <option value="لجنة التخطيط والمتابعة" data-i18n="committee.planning.name">لجنة التخطيط والمتابعة</option>
+                  <option value="مكتب المبادرات والمشروعات" data-i18n="committee.initiatives.name">مكتب المبادرات والمشروعات</option>
+                </select>
+                <span class="form-error"></span>
+              </div>
+
+              <div class="form-group">
+                <label data-i18n="join.form.motivation">لماذا تريد الانضمام؟</label>
+                <textarea id="notes" name="notes" class="form-textarea" data-validate="required,minlength:20" data-i18n-placeholder="join.form.motivation.placeholder" placeholder="أخبرنا عن دوافعك للانضمام..."></textarea>
+                <span class="form-error"></span>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--lg ripple-effect" style="width: 100%;" data-i18n="join.form.submit">إرسال الطلب</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="reveal-left">
+          <h3 style="font-size: var(--fs-xl); margin-bottom: var(--sp-xl); color: var(--text-primary);" data-i18n="join.faq.title">الأسئلة الشائعة</h3>
+
+          <div class="accordion">
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <span data-i18n="join.faq1.q">ما هي شروط الانضمام؟</span>
+                <span class="accordion-icon">▼</span>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-body" data-i18n="join.faq1.a">يجب أن يكون المتقدم مصري الجنسية، ولديه الرغبة في التطوع والعمل المجتمعي، ويفضل أن يكون طالباً جامعياً أو حديث التخرج.</div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <span data-i18n="join.faq2.q">هل هناك رسوم للانضمام؟</span>
+                <span class="accordion-icon">▼</span>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-body" data-i18n="join.faq2.a">لا، الانضمام إلى الاتحاد مجاني تماماً. نحن كيان تطوعي يعمل تحت مظلة وزارة الشباب والرياضة.</div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <span data-i18n="join.faq3.q">كيف يتم اختيار الأعضاء الجدد؟</span>
+                <span class="accordion-icon">▼</span>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-body" data-i18n="join.faq3.a">يتم مراجعة الطلبات من قبل لجنة الموارد البشرية، ثم يتم إجراء مقابلة شخصية للمتقدمين المؤهلين.</div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <span data-i18n="join.faq4.q">هل يمكنني اختيار اللجنة التي أعمل بها؟</span>
+                <span class="accordion-icon">▼</span>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-body" data-i18n="join.faq4.a">نعم، يمكنك تحديد اللجنة المفضلة لديك في استمارة الانضمام، وسيتم مراعاة رغبتك قدر الإمكان مع احتياجات الاتحاد.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Contact -->
+          <div class="card" style="margin-top: var(--sp-xl); padding: var(--sp-xl);">
+            <h4 style="margin-bottom: var(--sp-md); color: var(--clr-accent);" data-i18n="contact.info.title">معلومات التواصل</h4>
+            <div style="display: flex; align-items: center; gap: var(--sp-sm); margin-bottom: var(--sp-sm);">
+              <span>📧</span>
+              <a href="mailto:tmsu.menoufia@gmail.com" style="color: var(--text-primary); font-weight: var(--fw-semibold);">tmsu.menoufia@gmail.com</a>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--sp-sm);">
+              <span>📘</span>
+              <a href="https://www.facebook.com/TahyaMasrStudentsUnionMNF/?locale=ar_AR" target="_blank" style="color: var(--text-primary); font-weight: var(--fw-semibold);">Facebook Page</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><img src="assets/images/logo-menoufia.jpeg" alt="TMSU"><p data-i18n="footer.about">اتحاد طلاب تحيا مصر - محافظة المنوفية</p><div class="footer-social"><a href="https://www.facebook.com/TahyaMasrStudentsUnionMNF/?locale=ar_AR" target="_blank" rel="noopener noreferrer"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="mailto:tmsu.menoufia@gmail.com"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a></div></div>
+        <div><h4 class="footer-heading" data-i18n="footer.links">روابط سريعة</h4><div class="footer-links"><a href="index.html" data-i18n="nav.home">الرئيسية</a><a href="about.html" data-i18n="nav.about">من نحن</a><a href="events.html" data-i18n="nav.events">الفعاليات</a><a href="join.html" data-i18n="nav.join">انضم إلينا</a></div></div>
+        <div><h4 class="footer-heading" data-i18n="footer.committees">اللجان</h4><div class="footer-links"><a href="structure.html" data-i18n="committee.hr.name">الموارد البشرية</a><a href="structure.html" data-i18n="committee.training.name">التدريب</a><a href="structure.html" data-i18n="committee.media.name">الإعلامي</a></div></div>
+        <div><h4 class="footer-heading" data-i18n="footer.contact">تواصل معنا</h4><div class="footer-contact-item"><span class="contact-icon">📧</span><a href="mailto:tmsu.menoufia@gmail.com">tmsu.menoufia@gmail.com</a></div><div class="footer-contact-item"><span class="contact-icon">📍</span><span data-i18n="contact.address.value">محافظة المنوفية</span></div></div>
+      </div>
+      <div class="footer-bottom"><p data-i18n="footer.copyright">جميع الحقوق محفوظة © 2025</p><div class="footer-partner-logos"><img src="assets/images/logo-ministry.jpeg" alt="Ministry"><img src="assets/images/logo-main.jpeg" alt="TMSU"></div></div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top">↑</button>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/forms.js"></script>
+</body>
+</html>
