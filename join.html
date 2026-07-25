@@ -105,9 +105,19 @@
         <!-- Form -->
         <div class="reveal">
           <div class="card" style="padding: var(--sp-2xl);">
-            <h3 style="font-size: var(--fs-xl); margin-bottom: var(--sp-xl); color: var(--text-primary);" data-i18n="join.form.title">استمارة الانضمام</h3>
+            
+            <!-- When registration is closed -->
+            <div id="join-closed-message" style="display: none; text-align: center; padding: var(--sp-2xl) 0;">
+              <div style="font-size: 4rem; margin-bottom: var(--sp-md); color: #e74c3c;">🔒</div>
+              <h3 style="font-size: var(--fs-2xl); margin-bottom: var(--sp-sm); color: var(--text-primary);">باب الانضمام مغلق حالياً</h3>
+              <p style="color: var(--text-secondary); line-height: 1.8; max-width: 400px; margin: 0 auto;">عذراً، باب الانضمام لاتحاد طلاب تحيا مصر مغلق في الوقت الحالي. يرجى متابعة صفحاتنا الرسمية لمعرفة مواعيد الدفعة القادمة.</p>
+            </div>
 
-            <form id="join-form" novalidate>
+            <!-- When registration is open -->
+            <div id="join-form-wrapper">
+              <h3 style="font-size: var(--fs-xl); margin-bottom: var(--sp-xl); color: var(--text-primary);" data-i18n="join.form.title">استمارة الانضمام</h3>
+
+              <form id="join-form" novalidate>
               <div class="form-group">
                 <label data-i18n="join.form.name">الاسم الكامل</label>
                 <input type="text" id="fullname" name="fullname" class="form-input" data-validate="required,minlength:3" data-i18n-placeholder="join.form.name.placeholder" placeholder="أدخل اسمك الكامل">
@@ -162,6 +172,7 @@
 
               <button type="submit" class="btn btn--primary btn--lg ripple-effect" style="width: 100%;" data-i18n="join.form.submit">إرسال الطلب</button>
             </form>
+            </div>
           </div>
         </div>
 
