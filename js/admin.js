@@ -245,7 +245,40 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (e) {}
       }, 4000);
     }
+    // 3. Load Settings
+    await loadSettings();
   }
+
+  // --- Settings (Join Status) ---
+  const toggleJoinStatus = document.getElementById('toggle-join-status');
+  const joinStatusText = document.getElementById('join-status-text');
+
+  async function loadSettings() {
+    if (!toggleJoinStatus) return;
+    const isJoinOpen = await window.TMSU_API.fetchSetting('is_join_open');
+    // Default to true if not found
+    const isOpen = (isJoinOpen !== 'false');
+    toggleJoinStatus.checked = isOpen;
+    joinStatusText.textContent = isOpen ? 'مفتوح' : 'مغلق';
+    joinStatusText.style.color = isOpen ? '#2ecc71' : '#e74c3c';
+  }
+
+  toggleJoinStatus?.addEventListener('change', async (e) => {
+    const isOpen = e.target.checked;
+    joinStatusText.textContent = 'جاري...';
+    joinStatusText.style.color = 'var(--text-secondary)';
+    toggleJoinStatus.disabled = true;
+    
+    await window.TMSU_API.updateSetting('is_join_open', isOpen ? 'true' : 'false');
+    
+    joinStatusText.textContent = isOpen ? 'مفتوح' : 'مغلق';
+    joinStatusText.style.color = isOpen ? '#2ecc71' : '#e74c3c';
+    toggleJoinStatus.disabled = false;
+    
+    if (window.showToast) {
+      window.showToast(isOpen ? 'تم فتح باب الانضمام بنجاح 🟢' : 'تم إغلاق باب الانضمام بنجاح 🔴');
+    }
+  });
 
   // --- Render News ---
   async function renderNews() {

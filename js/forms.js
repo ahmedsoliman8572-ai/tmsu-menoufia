@@ -13,6 +13,21 @@ function initForms() {
   if (joinForm) {
     joinForm.addEventListener('submit', (e) => handleFormSubmit(e, joinForm));
     addLiveValidation(joinForm);
+    
+    // Check registration status
+    const joinFormWrapper = document.getElementById('join-form-wrapper');
+    const joinClosedMessage = document.getElementById('join-closed-message');
+    if (joinFormWrapper && joinClosedMessage && window.TMSU_API) {
+      window.TMSU_API.fetchSetting('is_join_open').then(isOpen => {
+        if (isOpen === 'false') {
+          joinFormWrapper.style.display = 'none';
+          joinClosedMessage.style.display = 'block';
+        } else {
+          joinFormWrapper.style.display = 'block';
+          joinClosedMessage.style.display = 'none';
+        }
+      });
+    }
   }
 
   // Contact form

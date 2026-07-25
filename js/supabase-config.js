@@ -394,6 +394,32 @@ window.TMSU_API = {
     saveLocalItems('top_members', members);
   },
 
+  // --- Settings / Registration Status API ---
+  async fetchSetting(key) {
+    if (supabaseClient) {
+      try {
+        const { data, error } = await supabaseClient.from('app_settings').select('setting_value').eq('setting_key', key).single();
+        if (!error && data) return data.setting_value;
+      } catch (e) {
+        console.warn(`Supabase fetchSetting error for ${key}:`, e);
+      }
+    }
+    return getLocalItems('setting_' + key, null);
+  },
+
+  async updateSetting(key, value) {
+    if (supabaseClient) {
+      try {
+        const { error } = await supabaseClient.from('app_settings').upsert({ setting_key: key, setting_value: value, updated_at: new Date().toISOString() });
+        if (!error) return true;
+      } catch (e) {
+        console.warn(`Supabase updateSetting error for ${key}:`, e);
+      }
+    }
+    saveLocalItems('setting_' + key, value);
+    return true;
+  },
+
   // Clear all data utility
   async deleteAllData() {
     if (supabaseClient) {
